@@ -1,52 +1,96 @@
-// Kalkulator sederhana
-const readline = require('readline');
-const { tambah, kurang, kali, bagi, pangkat, faktorial, isPrima, modulus, absolut, maksimum, minimum, bulatkan } = require('./solution');
+const readline = require("readline");
+const { tambah, kurang, kali, bagi, pangkat, faktorial, isPrima, modulus, absolut, maksimum, minimum, bulatkan } = require("./solution");
 
-// Interface untuk membaca input dari user
-const r1 = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+// Buat interface untuk membaca input pengguna
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
 
-// Menampilkan menu
-console.log('Kalkulator sederhana');
-console.log('1. Penjumlahan');
-console.log('2. Pengurangan');
-console.log('3. Perkalian');
-console.log('4. Pembagian');
-console.log('5. Pangkat');
-console.log('6. Faktorial');
-console.log('7. Cek bilangan prima');
-console.log('8. Modulus');
-console.log('9. Absolut');
-console.log('10. Maksimum');
-console.log('11. Minimum');
-console.log('12. Pembulatan');
+// Tampilkan menu operasi
+console.log("=== Kalkulator Sederhana ===");
+console.log("1. Tambah");
+console.log("2. Kurang");
+console.log("3. Kali");
+console.log("4. Bagi");
+console.log("5. Pangkat");
+console.log("6. Faktorial");
+console.log("7. Cek Bilangan Prima");
+console.log("8. Modulus");
+console.log("9. Nilai Absolut");
+console.log("10. Maksimum");
+console.log("11. Minimum");
+console.log("12. Bulatkan");
 
-// Meminta user untuk memilih menu
-r1.question('Pilih menu: ', (menu) => {
-    let a, b;
+// Minta pengguna memilih operasi
+rl.question("Pilih operasi (1-12): ", (opsi) => {
+  let a, b;
 
-    // Operasi yang memerlukan dua angka
-    if (["1", "2", "3", "4", "5", "8", "10", "11"].includes(menu)) {
-        r1.question("Masukkan angka pertama: ", (angka1) => {
-            a = parseFloat(angka1);
-            r1.question("Masukkan angka kedua: ", (angka2) => {
-                b = parseFloat(angka2);
-                tampilkanHasil(menu, a, b);
-                r1.close();
-            });
-        });
-    
-    // Operasi yang memerlukan satu angka
-    } else if () {
+  // Operasi yang membutuhkan dua angka
+  if (["1", "2", "3", "4", "5", "8", "10", "11"].includes(opsi)) {
+    rl.question("Masukkan angka pertama: ", (num1) => {
+      rl.question("Masukkan angka kedua: ", (num2) => {
+        a = parseFloat(num1);
+        b = parseFloat(num2);
+        kalkulasi(opsi, a, b);
+      });
+    });
 
-    } else {
-        console.log('Menu tidak valid');
-        r1.close();
-    }
+    // Operasi yang hanya membutuhkan satu angka
+  } else if (["6", "7", "9", "12"].includes(opsi)) {
+    rl.question("Masukkan angka: ", (num) => {
+      a = parseFloat(num);
+      kalkulasi(opsi, a);
+    });
+  } else {
+    console.log("Pilihan tidak valid!");
+    rl.close();
+  }
 });
 
 // Fungsi untuk menghitung berdasarkan opsi
-
-    
+function kalkulasi(opsi, a, b = null) {
+  let hasil;
+  switch (opsi) {
+    case "1":
+      hasil = tambah(a, b);
+      break;
+    case "2":
+      hasil = kurang(a, b);
+      break;
+    case "3":
+      hasil = kali(a, b);
+      break;
+    case "4":
+      hasil = bagi(a, b);
+      break;
+    case "5":
+      hasil = pangkat(a, b);
+      break;
+    case "6":
+      hasil = faktorial(a);
+      break;
+    case "7":
+      hasil = isPrima(a) ? "Bilangan Prima" : "Bukan Bilangan Prima";
+      break;
+    case "8":
+      hasil = modulus(a, b);
+      break;
+    case "9":
+      hasil = absolut(a);
+      break;
+    case "10":
+      hasil = maksimum(a, b);
+      break;
+    case "11":
+      hasil = minimum(a, b);
+      break;
+    case "12":
+      hasil = bulatkan(a);
+      break;
+    default:
+      hasil = "Operasi tidak dikenal";
+  }
+  console.log("Hasil:", hasil);
+  rl.close();
+}
