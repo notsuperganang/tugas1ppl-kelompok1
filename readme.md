@@ -62,5 +62,3 @@ Selain melengkapi `solution.js`, praktikan juga diminta untuk membuat sebuah **p
 4. Kumpulkan file `solution.js` dan `index.js` sesuai instruksi pengumpulan tugas.
 
 Selamat mengerjakan! 🚀
-
-test ssh key
